@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Special Message for Shana ✨</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@300;400;600&display=swap');
+    
+    /* Loading Screen Styles */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ff9ec7, #ffd6ec, #e6f3ff);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      transition: opacity 1s ease-out;
+    }
+    
+    .loading-text {
+      font-family: 'Fredoka', cursive;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #ff4081;
+      margin-bottom: 30px;
+      text-align: center;
+      text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.5);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes glow {
+      from { text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.5); }
+      to { text-shadow: 2px 2px 20px rgba(255, 64, 129, 0.8); }
+    }
+    
+    .loading-hearts {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .loading-heart {
+      font-size: 2.5rem;
+      animation: bounce 1.5s infinite ease-in-out;
+      filter: drop-shadow(0 0 10px rgba(255, 182, 193, 0.8));
+    }
+    
+    .loading-heart:nth-child(1) { animation-delay: 0.1s; }
+    .loading-heart:nth-child(2) { animation-delay: 0.3s; }
+    .loading-heart:nth-child(3) { animation-delay: 0.5s; }
+    .loading-heart:nth-child(4) { animation-delay: 0.7s; }
+    .loading-heart:nth-child(5) { animation-delay: 0.9s; }
+    .loading-heart:nth-child(6) { animation-delay: 1.1s; }
+    .loading-heart:nth-child(7) { animation-delay: 1.3s; }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-25px) scale(1.2); }
+    }
+    
+    /* Main Content Styles */
+    #content {
+      display: none;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #ffeef8, #e8f5ff, #fff0f8);
+      background-size: 400% 400%;
+      animation: gradientShift 8s ease infinite;
+      color: #ff4081;
+      font-family: 'Fredoka', cursive;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      margin: 0;
+      position: relative;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .floating-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .floating-element {
+      position: absolute;
+      animation: float-around 15s linear infinite;
+      opacity: 0.3;
+      font-size: 1.5rem;
+    }
+
+    @keyframes float-around {
+      0% { transform: translateX(-50px) translateY(100vh) rotate(0deg); }
+      100% { transform: translateX(calc(100vw + 50px)) translateY(-50px) rotate(360deg); }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      border-radius: 25px;
+      padding: 40px;
+      box-shadow: 
+        0 20px 40px rgba(255, 102, 153, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      max-width: 600px;
+      text-align: center;
+      position: relative;
+      border: 2px solid rgba(255, 182, 193, 0.3);
+      z-index: 10;
+      transform: scale(0.8);
+      animation: containerEntry 1s ease-out forwards;
+    }
+
+    @keyframes containerEntry {
+      to { transform: scale(1); }
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 2px solid rgba(255, 182, 193, 0.2);
+      border-radius: 35px;
+      z-index: -1;
+      animation: pulse-border 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-border {
+      0%, 100% { transform: scale(1); opacity: 0.3; }
+      50% { transform: scale(1.05); opacity: 0.6; }
+    }
+
+    .typewriter {
+      font-size: 1.8rem;
+      font-weight: 600;
+      white-space: pre-wrap;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-shadow: 2px 2px 8px rgba(255, 182, 193, 0.3);
+      position: relative;
+      line-height: 1.4;
+      margin: 20px 0;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 25px;
+      background: linear-gradient(45deg, #ff4081, #ff80ab);
+      margin-left: 5px;
+      animation: blink 0.8s infinite;
+      vertical-align: middle;
+      border-radius: 2px;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; transform: scaleY(1); }
+      50% { opacity: 0; transform: scaleY(0.8); }
+    }
+
+    .hearts-container {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      top: 0;
+      left: 0;
+      z-index: 5;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: heartFloat 6s ease-out forwards;
+      opacity: 0;
+      filter: drop-shadow(0 0 5px rgba(255, 182, 193, 0.6));
+    }
+
+    @keyframes heartFloat {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      90% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-150px) rotate(360deg) scale(0.5);
+        opacity: 0;
+      }
+    }
+
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-family: 'Fredoka', cursive;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.5s;
+    }
+
+    button:hover::before {
+      left: 100%;
+    }
+
+    button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(255, 107, 157, 0.6);
+    }
+
+    button:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .special-btn {
+      background: linear-gradient(45deg, #ff1744, #ff5722, #ff9800);
+      animation: rainbow 3s linear infinite;
+    }
+
+    @keyframes rainbow {
+      0% { background: linear-gradient(45deg, #ff1744, #ff5722); }
+      25% { background: linear-gradient(45deg, #ff5722, #ff9800); }
+      50% { background: linear-gradient(45deg, #ff9800, #4caf50); }
+      75% { background: linear-gradient(45deg, #4caf50, #2196f3); }
+      100% { background: linear-gradient(45deg, #2196f3, #ff1744); }
+    }
+
+    .character {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 120px;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      z-index: 15;
+      filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+    }
+
+    .character:hover {
+      transform: scale(1.15) rotate(10deg);
+      filter: drop-shadow(0 10px 25px rgba(255, 182, 193, 0.4));
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .overlay-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      z-index: 100;
+      text-align: center;
+      border: 2px solid rgba(255, 182, 193, 0.3);
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes popIn {
+      to { transform: translate(-50%, -50%) scale(1); }
+    }
+
+    .confetti {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: confetti-fall 3s linear forwards;
+      z-index: 1000;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    .sparkle {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      animation: sparkle 1.5s ease-out forwards;
+      z-index: 1000;
+    }
+
+    @keyframes sparkle {
+      0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1) rotate(180deg);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .mood-meter {
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(255, 182, 193, 0.1);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 182, 193, 0.3);
+    }
+
+    .mood-bar {
+      width: 100%;
+      height: 20px;
+      background: rgba(255, 182, 193, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .mood-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff6b9d, #ff8fab, #ffc1e0);
+      border-radius: 10px;
+      transition: width 2s ease-out;
+      position: relative;
+    }
+
+    .mood-fill::after {
+      content: '💖';
+      position: absolute;
+      right: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+    }
+
+    .surprise-btn {
+      margin-top: 20px;
+      background: linear-gradient(45deg, #9c27b0, #e91e63);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .surprise-btn::after {
+      content: '✨';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.2rem;
+      opacity: 0;
+      animation: sparkleBtn 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkleBtn {
+      0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px;
+        padding: 25px;
+      }
+      
+      .typewriter {
+        font-size: 1.5rem;
+        min-height: 100px;
+      }
+      
+      .buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      button {
+        width: 100%;
+        max-width: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loading-text">Sebentar ya sayangg, akuu lagi siapin surprise nih... ✨</div>
+    <div class="loading-hearts">
+      <div class="loading-heart">💖</div>
+      <div class="loading-heart">💕</div>
+      <div class="loading-heart">💗</div>
+      <div class="loading-heart">💓</div>
+      <div class="loading-heart">💞</div>
+      <div class="loading-heart">💝</div>
+      <div class="loading-heart">💘</div>
+    </div>
+  </div>
+  
+  <!-- Floating Background Elements -->
+  <div class="floating-elements" id="floatingElements"></div>
+  
+  <!-- Main Content -->
+  <div id="content">
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <div class="container">
+      <div id="typewriter" class="typewriter"></div>
+      <div id="cursor" class="cursor"></div>
+      
+      
+      <div class="buttons">
+        <button id="nextBtn">Next Message </button>
+        <button id="hugBtn">Send Hug </button>
+        <button id="surpriseBtn" class="surprise-btn">Surprise! 🎉</button>
+        <button id="moodBtn" class="special-btn">Boost Mood! 🌈</button>
+      </div>
+    </div>
+    
+    <img src="image.png" alt="Cute character" class="character" id="character">
+  </div>
+
+  <script>
+    // Loading Screen Transition
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.style.opacity = '0';
+        
+        setTimeout(function() {
+          loadingScreen.style.display = 'none';
+          document.getElementById('content').style.display = 'block';
+          startMainContent();
+        }, 1000);
+      }, 4000);
+    });
+
+    function startMainContent() {
+      const texts = [
+        "Hai sayangg~ ",
+        "Haiii sayanggg, Jangan sedih lagi ya, aku bakalan ada terus kok buat kamu ",
+        "Kamu itu kuat, lucu, dan bikin aku senyum-senyum sendiri ",
+        "Kalau kamu senyum, dunia jadi lebih cerah tau ",
+        "Aku di sini selalu buat kamu! ",
+        "Kamu jangan sedih yaa, karena aku sayang banget sama kamu ",
+        "Kamu itu spesial, dan aku beruntung banget punya kamu di hidupku ",
+        "Setiap hari aku bersyukur karena kamu ada di sini ",
+        "Kalau kamu sedih, aku juga sedih 🥺",
+        "Jadi, yuk kita hadapi semuanya bareng-bareng ",
+        "Aku akan selalu ada untukmu, sayanggg",
+        "Kamu adalah alasan aku tersenyum setiap hari ",
+        "Together we can conquer anything! "
+      ];
+
+      let count = 0;
+      let index = 0;
+      let currentText = '';
+      let isTyping = false;
+      let moodLevel = 20;
+      let typingInterval;
+      
+      const typewriter = document.getElementById('typewriter');
+      const cursor = document.getElementById('cursor');
+      const nextBtn = document.getElementById('nextBtn');
+      const hugBtn = document.getElementById('hugBtn');
+      const surpriseBtn = document.getElementById('surpriseBtn');
+      const moodBtn = document.getElementById('moodBtn');
+      const character = document.getElementById('character');
+      const heartsContainer = document.getElementById('heartsContainer');
+      const moodFill = document.getElementById('moodFill');
+      const moodText = document.getElementById('moodText');
+      const floatingElements = document.getElementById('floatingElements');
+
+      // Initialize floating elements
+      function createFloatingElements() {
+        const elements = ['⭐', '✨', '🌟', '💫', '🦋', '🌸', '🌺', '🍀'];
+        for (let i = 0; i < 12; i++) {
+          const element = document.createElement('div');
+          element.className = 'floating-element';
+          element.textContent = elements[Math.floor(Math.random() * elements.length)];
+          element.style.top = Math.random() * 100 + 'vh';
+          element.style.animationDelay = Math.random() * 15 + 's';
+          element.style.animationDuration = (15 + Math.random() * 10) + 's';
+          floatingElements.appendChild(element);
+        }
+      }
+
+      function updateMoodMeter() {
+        moodFill.style.width = moodLevel + '%';
+        let moodEmoji = '';
+        let moodMsg = '';
+        
+        if (moodLevel < 30) {
+          moodEmoji = '😢';
+          moodMsg = 'Need more hugs!';
+        } else if (moodLevel < 60) {
+          moodEmoji = '😊';
+          moodMsg = 'Getting better!';
+        } else if (moodLevel < 90) {
+          moodEmoji = '😄';
+          moodMsg = 'Much happier!';
+        } else {
+          moodEmoji = '🥰';
+          moodMsg = 'Super happy!';
+        }
+        
+        moodText.textContent = `${moodEmoji} ${moodMsg}`;
+      }
+
+      function type() {
+        if (isTyping) return;
+        
+        isTyping = true;
+        cursor.style.display = 'inline-block';
+        
+        if (count >= texts.length) count = 0;
+        currentText = texts[count];
+        index = 0;
+        
+        // Clear any existing typing interval
+        if (typingInterval) clearInterval(typingInterval);
+        
+        // Start new typing interval
+        typingInterval = setInterval(() => {
+          if (index <= currentText.length) {
+            typewriter.textContent = currentText.substring(0, index);
+            
+            // Create hearts randomly while typing
+            if (Math.random() > 0.9) {
+              createHeart();
+            }
+            
+            index++;
+          } else {
+            // Finished typing current message
+            clearInterval(typingInterval);
+            isTyping = false;
+            moodLevel = Math.min(100, moodLevel + 2);
+            updateMoodMeter();
+            
+            // Pause before continuing to next message
+            setTimeout(() => {
+              count = (count + 1) % texts.length;
+              type();
+            }, 3000 + Math.random() * 2000);
+          }
+        }, 50 + Math.random() * 50); // More consistent typing speed
+      }
+
+      function createHeart() {
+        const hearts = ['❤️', '💖', '💕', '💗', '💓', '💞', '💝', '💘', '🧡', '💛', '💚', '💙', '💜'];
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = (15 + Math.random() * 15) + 'px';
+        heart.style.animationDuration = (4 + Math.random() * 3) + 's';
+        heartsContainer.appendChild(heart);
+        
+        setTimeout(() => {
+          heart.remove();
+        }, 7000);
+      }
+
+      function createSparkle() {
+        for (let i = 0; i < 5; i++) {
+          setTimeout(() => {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            sparkle.style.animationDelay = Math.random() * 0.5 + 's';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+              sparkle.remove();
+            }, 2000);
+          }, i * 100);
+        }
+      }
+
+      function createConfetti() {
+        const colors = ['#ff6b9d', '#ff8fab', '#ffc1e0', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+        for (let i = 0; i < 80; i++) {
+          setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDuration = (2 + Math.random() * 2) + 's';
+            confetti.style.animationDelay = Math.random() * 0.5 + 's';
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => {
+              confetti.remove();
+            }, 4000);
+          }, i * 20);
+        }
+      }
+
+      function showOverlayMessage(title, message, emoji = '💖') {
+        const overlay = document.createElement('div');
+        overlay.className = 'overlay-message';
+        overlay.innerHTML = `
+          <h2 style="margin-top: 0; color: #ff4081;">${emoji} ${title} ${emoji}</h2>
+          <p style="font-size: 1.1rem; margin: 20px 0;">${message}</p>
+          <button onclick="this.parentElement.remove()" style="margin-top: 20px;">Close 💕</button>
+        `;
+        document.body.appendChild(overlay);
+        
+        setTimeout(() => {
+          if (overlay.parentElement) {
+            overlay.remove();
+          }
+        }, 5000);
+      }
+
+      // Event Listeners
+      nextBtn.addEventListener('click', () => {
+        if (isTyping) {
+          // Skip current typing and show full message
+          clearInterval(typingInterval);
+          typewriter.textContent = currentText;
+          isTyping = false;
+        }
+        
+        // Move to next message
+        count = (count + 1) % texts.length;
+        setTimeout(type, 500); // Short delay before starting next message
+        
+        createConfetti();
+        moodLevel = Math.min(100, moodLevel + 5);
+        updateMoodMeter();
+      });
+
+      hugBtn.addEventListener('click', () => {
+        showOverlayMessage('Virtual Hug!', 'Lala is sending you the biggest, warmest hug', '🤭');
+        createConfetti();
+        for (let i = 0; i < 30; i++) {
+          setTimeout(createHeart, i * 50);
+        }
+        moodLevel = Math.min(100, moodLevel + 15);
+        updateMoodMeter();
+      });
+
+      surpriseBtn.addEventListener('click', () => {
+        const surprises = [
+          { title: 'Manusia Yang aku sayang', msg: 'kamu ituuu manusia yang paling aku sayang selain mama ku', emoji: '' }
+        ];
+        
+        const surprise = surprises[Math.floor(Math.random() * surprises.length)];
+        showOverlayMessage(surprise.title, surprise.msg, surprise.emoji);
+        createConfetti();
+        createSparkle();
+        moodLevel = Math.min(100, moodLevel + 20);
+        updateMoodMeter();
+      });
+
+      moodBtn.addEventListener('click', () => {
+        showOverlayMessage('', 'Akuuuu sayanggggggggggggggggg bangettt bangettt sama kamuuu', '');
+        createConfetti();
+        for (let i = 0; i < 50; i++) {
+          setTimeout(createHeart, i * 30);
+        }
+        for (let i = 0; i < 20; i++) {
+          setTimeout(createSparkle, i * 50);
+        }
+        moodLevel = Math.min(100, moodLevel + 25);
+        updateMoodMeter();
+      });
+
+      character.addEventListener('click', () => {
+        character.src = "image.png";
+        setTimeout(() => {
+          character.src = "image.png";
+        }, 1000);
+        createConfetti();
+        showOverlayMessage('Unaa!!', 'haii keykey! aku juga sayang kamu', '');
+        moodLevel = Math.min(100, moodLevel + 10);
+        updateMoodMeter();
+      });
+
+      // Initialize everything
+      createFloatingElements();
+      updateMoodMeter();
+      // Start typing with initial delay
+      setTimeout(type, 1500);
+      
+      // Create occasional hearts and sparkles with longer intervals
+      setInterval(createHeart, 3000);
+      setInterval(() => {
+        if (Math.random() > 0.8) createSparkle();
+      }, 4000);
+      
+      // Gradual mood improvement
+      setInterval(() => {
+        if (moodLevel < 100) {
+          moodLevel += 1;
+          updateMoodMeter();
+        }
+      }, 10000);
+    }
+  </script>
+</body>
+</html>
